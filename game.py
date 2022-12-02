@@ -17,7 +17,7 @@ screen = None
 stop_program = False
 start_x = WIDTH//2
 start_y = HEIGHT//2
-diameter = 50
+player_diameter = 50
 player_color = (0, 0, 0)
 player_speed = 1
 id_player = 'The first player'
@@ -26,17 +26,17 @@ cd_send = True
 
 class Player:
 
-    def __init__(self, x, y, d, col, screen, speed, player_id):
+    def __init__(self, x, y, d, col, speed, player_id):
         self.x = x
         self.y = y
         self.d = d
         self.col = col
-        self.screen = screen
         self.speed = speed
         self.id_player = player_id
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.col, (self.x, self.y), self.d)
+        global screen
+        pygame.draw.circle(screen, self.col, (self.x, self.y), self.d)
 
 
 def connect_server():
@@ -55,8 +55,7 @@ def connect_server():
 class MainController:
 
     def __init__(self, client):
-        global screen
-        self.player = Player(start_x, start_y, diameter, player_color, screen, player_speed, id_player)
+        self.player = Player(start_x, start_y, player_diameter, player_color, player_speed, id_player)
         self.client = client
         self.other_players = []
 
@@ -83,8 +82,8 @@ class MainController:
                 self.player.x += self.player.speed
 
     def append_player(self, data):
-        self.other_players.append(Player(data['x'], data['y'], diameter, player_color,
-                                         screen, player_speed, data['player_id']))
+        self.other_players.append(Player(data['x'], data['y'], player_diameter,
+                                         player_color, player_speed, data['player_id']))
 
     def give_data_to_player(self, data):
         global cd_send
