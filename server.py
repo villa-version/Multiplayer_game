@@ -1,11 +1,11 @@
+import config
 import select
 from socket import socket, AF_INET, SOCK_STREAM
 import json
 from signal import signal, SIGINT
-from time import sleep
 
-HOST = ''
-PORT = 6787
+HOST = config.HOST['Server']
+PORT = config.PORT
 stop = False
 
 

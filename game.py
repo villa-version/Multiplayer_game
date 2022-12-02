@@ -1,19 +1,19 @@
 import pygame, sys
+import config
 from socket import socket, AF_INET, SOCK_STREAM
 import json
-from time import sleep
 from signal import signal, SIGINT
 import select
-# from re import findall
 
+
+HOST = config.HOST['Client']
+PORT = config.PORT
 
 WIDTH = 1000
 HEIGHT = 700
 WINDOW_NAME = 'The First Player'
 held_key = []
 screen = None
-HOST = 'localhost'
-PORT = 6787
 stop_program = False
 start_x = WIDTH//2
 start_y = HEIGHT//2
